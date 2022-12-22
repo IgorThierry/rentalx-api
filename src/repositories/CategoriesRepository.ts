@@ -25,6 +25,11 @@ class CategoriesRepository {
   list() {
     return this.categories;
   }
+
+  findByName(name: string) {
+    const category = this.categories.find(c => c.name === name);
+    return category;
+  }
 }
 
 export { CategoriesRepository, ICreateCategoryDTO };
