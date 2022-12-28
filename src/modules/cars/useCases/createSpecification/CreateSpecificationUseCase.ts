@@ -1,12 +1,12 @@
-import { AppError } from '../../../errors/AppError';
-import { ISpecificationsRepository } from '../repositories/ISpecificationsRepository';
+import { AppError } from '../../../../errors/AppError';
+import { ISpecificationsRepository } from '../../repositories/ISpecificationsRepository';
 
 interface IRequest {
   name: string;
   description: string;
 }
 
-class CreateSpecificationService {
+class CreateSpecificationUseCase {
   constructor(private specificationsRepository: ISpecificationsRepository) {}
 
   execute({ name, description }: IRequest) {
@@ -21,4 +21,4 @@ class CreateSpecificationService {
   }
 }
 
-export { CreateSpecificationService };
+export { CreateSpecificationUseCase };
