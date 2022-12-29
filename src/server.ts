@@ -2,10 +2,9 @@ import 'dotenv/config';
 import express from 'express';
 import swaggerUI from 'swagger-ui-express';
 
-import swaggerFile from './swagger.json';
-
 import { appErrorHandler } from './errors/appErrorHandler';
 import { router } from './routes';
+import swaggerFile from './swagger.json';
 
 const app = express();
 
