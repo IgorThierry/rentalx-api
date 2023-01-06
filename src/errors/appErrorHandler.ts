@@ -1,12 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
+
 import { AppError } from './AppError';
 
-export const appErrorHandler = (
+export function appErrorHandler(
   err: Error,
   request: Request,
   response: Response,
-  _: NextFunction,
-) => {
+  next: NextFunction,
+) {
   if (process.env.NODE_ENV === 'development') console.log(err);
 
   if (err instanceof AppError) {
@@ -20,4 +21,4 @@ export const appErrorHandler = (
     status: 'error',
     message: 'Internal server error',
   });
-};
+}
