@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
-import { container } from 'tsyringe';
 
 import { authConfig } from '../config/auth';
 import { AppError } from '../errors/AppError';
@@ -34,7 +33,7 @@ function ensureAuthenticated(
     const user = usersRepository.findById(user_id);
 
     if (!user) {
-      throw new AppError('User does not exists.');
+      throw new AppError('User does not exists.', 401);
     }
 
     return next();

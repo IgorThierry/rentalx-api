@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import 'express-async-errors';
 import swaggerUI from 'swagger-ui-express';
 
 import './database';
