@@ -11,11 +11,11 @@ interface ITokenPayload {
   sub: string;
 }
 
-function ensureAuthenticated(
+async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction,
-): void {
+) {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -30,11 +30,13 @@ function ensureAuthenticated(
     const { sub: user_id } = decoded as ITokenPayload;
 
     const usersRepository = new UsersRepository();
-    const user = usersRepository.findById(user_id);
+    const user = await usersRepository.findById(user_id);
 
     if (!user) {
       throw new AppError('User does not exists.', 401);
     }
+
+    request.user = { id: user_id };
 
     return next();
   } catch {
