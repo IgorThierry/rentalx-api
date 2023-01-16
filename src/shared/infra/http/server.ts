@@ -1,15 +1,17 @@
+import 'reflect-metadata';
 import 'dotenv/config';
 import express from 'express';
 import 'express-async-errors';
 import swaggerUI from 'swagger-ui-express';
 
-import './database';
+import '../typeorm';
 
 import '@shared/container';
-import { appErrorHandler } from '@errors/appErrorHandler';
 
-import { router } from './routes';
-import swaggerFile from './swagger.json';
+import { appErrorHandler } from '@shared/infra/http/middlewares/appErrorHandler';
+import { router } from '@shared/infra/http/routes';
+
+import swaggerFile from '../../../swagger.json';
 
 const app = express();
 
