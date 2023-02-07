@@ -31,4 +31,4 @@ class CategoriesRepository implements ICategoriesRepository {
   }
 }
 
-export { CategoriesRepository, ICreateCategoryDTO };
+export { CategoriesRepository };
