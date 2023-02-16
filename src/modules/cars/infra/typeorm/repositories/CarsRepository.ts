@@ -21,16 +21,20 @@ class CarsRepository implements ICarsRepository {
       fine_amount,
       brand,
       category_id,
+      specifications,
+      id,
     } = data;
 
     const car = this.repository.create({
-      name,
-      description,
-      daily_rate,
-      license_plate,
-      fine_amount,
       brand,
       category_id,
+      daily_rate,
+      description,
+      fine_amount,
+      license_plate,
+      name,
+      specifications,
+      id,
     });
 
     await this.repository.save(car);
