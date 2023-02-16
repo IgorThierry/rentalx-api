@@ -16,6 +16,7 @@ class InMemoryCarsRepository implements ICarsRepository {
       brand,
       category_id,
       id,
+      specifications,
     } = data;
 
     const car = new Car();
@@ -28,6 +29,7 @@ class InMemoryCarsRepository implements ICarsRepository {
       brand,
       category_id,
       id,
+      specifications,
     });
 
     this.cars.push(car);
