@@ -25,6 +25,7 @@ describe('Create Car', () => {
 
     const car = await createCarUseCase.execute(carData);
     expect(car).toHaveProperty('id');
+    expect(car).toHaveProperty('created_at');
   });
 
   it('Should not be able to create a car with exists license plate', async () => {

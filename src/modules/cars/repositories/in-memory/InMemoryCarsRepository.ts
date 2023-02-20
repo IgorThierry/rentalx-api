@@ -3,6 +3,10 @@ import { Car } from '@modules/cars/infra/typeorm/entities/Car';
 
 import { ICarsRepository } from '../ICarsRepository';
 
+interface ICarData extends ICreateCarDTO {
+  created_at: Date;
+}
+
 class InMemoryCarsRepository implements ICarsRepository {
   cars: Car[] = [];
 
@@ -20,7 +24,8 @@ class InMemoryCarsRepository implements ICarsRepository {
     } = data;
 
     const car = new Car();
-    Object.assign(car, {
+
+    const carData: ICarData = {
       name,
       description,
       daily_rate,
@@ -28,9 +33,13 @@ class InMemoryCarsRepository implements ICarsRepository {
       fine_amount,
       brand,
       category_id,
-      id,
-      specifications,
-    });
+      created_at: new Date(),
+    };
+
+    if (id) carData.id = id;
+    if (specifications) carData.specifications = specifications;
+
+    Object.assign(car, carData);
 
     this.cars.push(car);
 
