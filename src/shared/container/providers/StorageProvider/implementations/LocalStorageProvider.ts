@@ -7,10 +7,16 @@ import { IStorageProvider } from '../IStorageProvider';
 
 class LocalStorageProvider implements IStorageProvider {
   async save(file: string, folder: string): Promise<string> {
-    await fs.promises.rename(
-      resolve(upload.tmpFolder, file),
-      resolve(`${upload.tmpFolder}/${folder}`, file),
-    );
+    const destinationPath = resolve(`${upload.tmpFolder}/${folder}`);
+
+    if (!fs.existsSync(destinationPath)) {
+      fs.mkdirSync(destinationPath);
+    }
+
+    const currentFilePath = resolve(upload.tmpFolder, file);
+    const newFilePath = resolve(`${upload.tmpFolder}/${folder}`, file);
+
+    await fs.promises.rename(currentFilePath, newFilePath);
 
     return file;
   }
