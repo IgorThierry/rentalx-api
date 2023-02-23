@@ -6,6 +6,7 @@ export function appErrorHandler(
   err: Error,
   request: Request,
   response: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction,
 ) {
   if (process.env.NODE_ENV === 'development') console.log(err);
