@@ -4,19 +4,17 @@ import { v4 as uuidV4 } from 'uuid';
 import createConnection from '../index';
 
 async function create() {
-  const connection = await createConnection('localhost');
+  const connection = await createConnection();
 
   const id = uuidV4();
   const password = await hash('admin', 8);
 
-  const queryString = `INSERT INTO users(
-      id, name, email, password, driver_license, "isAdmin", avatar, created_at
-    )
-    values(
-      '${id}', 'Admin', 'admin@rentx.com.br' ,'${password}', 'XXXXXX', true, null, 'now()'
-    )`;
+  await connection.query(
+    `INSERT INTO USERS(id, name, email, password, "isAdmin", created_at, driver_license )
+      values('${id}', 'admin', 'admin@rentx.com.br', '${password}', true, 'now()', 'XXXXXX')
+    `,
+  );
 
-  await connection.query(queryString);
   await connection.close();
 }
 
