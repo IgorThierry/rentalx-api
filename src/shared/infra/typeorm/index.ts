@@ -6,7 +6,10 @@ export default async (): Promise<Connection> => {
   const database =
     process.env.NODE_ENV === 'test' ? 'rentx_test' : defaultOptions.database;
 
-  const newOptions = Object.assign(defaultOptions, { database });
+  const newOptions = Object.assign(defaultOptions, {
+    database,
+    host: 'database',
+  });
 
   return createConnection(newOptions);
 };
