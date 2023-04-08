@@ -1,15 +1,15 @@
 import { hash } from 'bcrypt';
 import request from 'supertest';
-import { Connection } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
 import { app } from '@shared/infra/http/app';
-import createConnection from '@shared/infra/typeorm';
+import { createConnection } from '@shared/infra/typeorm';
 
-let connection: Connection;
+let connection: DataSource;
 describe('List Category Controller', () => {
   beforeAll(async () => {
-    connection = await createConnection();
+    connection = await createConnection('localhost');
     await connection.runMigrations();
 
     const id = uuid();
@@ -24,7 +24,7 @@ describe('List Category Controller', () => {
 
   afterAll(async () => {
     await connection.dropDatabase();
-    await connection.close();
+    await connection.destroy();
   });
 
   it('should be able to list all categories ', async () => {

@@ -1,7 +1,8 @@
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { ICreateCategoryDTO } from '@modules/cars/dtos/ICreateCategoryDTO';
 import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository';
+import dataSource from '@shared/infra/typeorm';
 
 import { Category } from '../entities/Category';
 
@@ -9,7 +10,7 @@ class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
 
   constructor() {
-    this.repository = getRepository(Category);
+    this.repository = dataSource.getRepository(Category);
   }
 
   async create({ name, description }: ICreateCategoryDTO): Promise<Category> {
@@ -26,7 +27,7 @@ class CategoriesRepository implements ICategoriesRepository {
   }
 
   async findByName(name: string) {
-    const category = await this.repository.findOne({ name });
+    const category = await this.repository.findOneBy({ name });
     return category;
   }
 }

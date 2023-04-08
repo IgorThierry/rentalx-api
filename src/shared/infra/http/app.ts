@@ -8,11 +8,9 @@ import '@shared/container';
 
 import { appErrorHandler } from '@shared/infra/http/middlewares/appErrorHandler';
 import { router } from '@shared/infra/http/routes';
-import createConnection from '@shared/infra/typeorm';
 
 import swaggerFile from '../../../swagger.json';
 
-createConnection();
 const app = express();
 
 app.use(express.json());
