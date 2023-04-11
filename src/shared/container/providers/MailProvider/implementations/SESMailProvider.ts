@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { SES } from 'aws-sdk';
 import fs from 'fs';
 import handlebars from 'handlebars';
 import nodemailer, { Transporter } from 'nodemailer';
 import { injectable } from 'tsyringe';
+
+import { SES } from '@aws-sdk/client-ses';
 
 import { IMailProvider } from '../IMailProvider';
 
